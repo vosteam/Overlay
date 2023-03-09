@@ -5,7 +5,6 @@
 
 const MARGINS margins = { -1 ,-1, -1, -1 };
 const wchar_t g_szClassName[] = L"overlay";
-
 bool isVisible = true;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -13,10 +12,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch (msg)
     {
     case WM_HOTKEY:
-        if (wParam == 1) // При нажатии на горячую клавишу
+        if (wParam == 1) // При нажатии на горячую клавишу ALT + Z
         {
             isVisible = !isVisible; // Инвертируем значение переменной isVisible
             ShowWindow(hwnd, isVisible ? SW_SHOW : SW_HIDE); // Показываем/скрываем окно в зависимости от значения isVisible
+        }
+        else if (wParam == 2) // При нажатии на горячую клавишу ALT + X
+        {
+            // Закрытие окна
+            DestroyWindow(hwnd);
         }
         break;
     case WM_PAINT:
@@ -39,8 +43,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     return 0;
 }
-
-
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -78,6 +80,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     // Регистрация горячей клавиши
     RegisterHotKey(hwnd, 1, MOD_ALT, 0x5A); // Здесь 0x5A соответствует клавише Z
+    RegisterHotKey(hwnd, 2, MOD_ALT, 0x58); // Здесь 0x58 соответствует клавише X
 
     // Цикл обработки сообщений
     while (GetMessage(&Msg, NULL, 0, 0) > 0)
@@ -88,6 +91,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     // Удаление горячей клавиши
     UnregisterHotKey(hwnd, 1);
+    UnregisterHotKey(hwnd, 2);
 
     exit(0);
     return Msg.wParam;
