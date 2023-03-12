@@ -12,14 +12,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch (msg)
     {
     case WM_HOTKEY:
-        if (wParam == 1) // When the hotkey ALT + Z is pressed
+        if (wParam == 1)
         {
-            isVisible = !isVisible; // Invert the value of the isVisible variable
-            ShowWindow(hwnd, isVisible ? SW_SHOW : SW_HIDE); // Show/hide the window based on the value of isVisible
+            isVisible = !isVisible;
+            ShowWindow(hwnd, isVisible ? SW_SHOW : SW_HIDE);
         }
-        else if (wParam == 2) // When the hotkey ALT + X is pressed
+        else if (wParam == 2)
         {
-            // Close the window
             DestroyWindow(hwnd);
         }
         break;
@@ -31,7 +30,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         GetTextMetrics(hdc, &tm);
         int x = 10;
         int y = tm.tmHeight + 10;
-        TextOut(hdc, x, y, L"By vos9", 7);
+
+        auto currentTime = std::chrono::system_clock::now();
+        auto currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
+
+        wchar_t timeStr[100];
+        wcsftime(timeStr, 100, L"Time: %H:%M:%S", std::localtime(&currentTime_t));
+
+        TextOut(hdc, x, y, timeStr, wcslen(timeStr));
         EndPaint(hwnd, &ps);
     }
     break;
@@ -50,10 +56,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     HWND hwnd;
     MSG Msg;
 
-    // Register window class
     wc.cbSize = sizeof(WNDCLASSEX);
     wc.style = CS_HREDRAW | CS_VREDRAW;
-    wc.lpfnWndProc = WndProc; // Set message handler
+    wc.lpfnWndProc = WndProc;
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
     wc.hInstance = hInstance;
@@ -66,9 +71,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     RegisterClassEx(&wc);
 
-    // Create window
     hwnd = CreateWindowEx(
-        WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW | WS_EX_TOPMOST, // <--- Add the WS_EX_TOOLWINDOW flag
+        WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW | WS_EX_TOPMOST,
         g_szClassName,
         g_szClassName,
         WS_POPUP | WS_VISIBLE,
@@ -78,18 +82,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);
     DwmExtendFrameIntoClientArea(hwnd, &margins);
 
-    // Register hotkeys
-    RegisterHotKey(hwnd, 1, MOD_ALT, 0x5A); // Here 0x5A corresponds to the Z key
-    RegisterHotKey(hwnd, 2, MOD_ALT, 0x58); // Here 0x58 corresponds to the X key
+    RegisterHotKey(hwnd, 1, MOD_ALT, 0x5A);
+    RegisterHotKey(hwnd, 2, MOD_ALT, 0x58);
 
-    // Message loop
     while (GetMessage(&Msg, NULL, 0, 0) > 0)
     {
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
+
+        if (Msg.message == WM_PAINT)
+        {
+            RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE);
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    // Unregister hotkeys
     UnregisterHotKey(hwnd, 1);
     UnregisterHotKey(hwnd, 2);
 
