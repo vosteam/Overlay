@@ -2,6 +2,7 @@
 #include <chrono>
 #include <Dwmapi.h>
 #pragma comment(lib, "dwmapi.lib")
+#pragma warning(disable : 4996)
 
 const MARGINS margins = { -1 ,-1, -1, -1 };
 const wchar_t g_szClassName[] = L"overlay";
