@@ -23,7 +23,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         else if (wParam == 4)
         {
-            screenRecoder(file_video);
+            screenRecorder(file_video);
         }
         break;
     case WM_PAINT:
