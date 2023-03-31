@@ -19,11 +19,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         else if (wParam == 3)
         {
-            captureScreen(file_screenshot);
+            std::thread screenshotThread(captureScreen, file_screenshot);
+            //captureScreen(file_screenshot);
+            screenshotThread.join();
         }
         else if (wParam == 4)
         {
-            screenRecoder(file_video);
+            std::thread videoThread(screenRecorder, file_video);
+            //screenRecoder(file_video);
+            videoThread.join();
         }
         break;
     case WM_PAINT:
@@ -51,6 +55,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     default:
         return DefWindowProc(hwnd, msg, wParam, lParam);
     }
+    return 0;
+}
+
+DWORD WINAPI ThreadProc(LPVOID lpParam)
+{
+    HWND hwnd = (HWND)lpParam;
+
+    while (true)
+    {
+        RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+
     return 0;
 }
 
@@ -91,23 +108,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     RegisterHotKey(hwnd, 3, MOD_ALT, 0x50);
     RegisterHotKey(hwnd, 4, MOD_ALT, 0x56);
 
+    HANDLE hThread = CreateThread(NULL, 0, &ThreadProc, hwnd, 0, NULL);
+
     while (GetMessage(&Msg, NULL, 0, 0) > 0)
     {
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
-
-        if (Msg.message == WM_PAINT)
-        {
-            RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE);
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
     UnregisterHotKey(hwnd, 1);
     UnregisterHotKey(hwnd, 2);
     UnregisterHotKey(hwnd, 3);
     UnregisterHotKey(hwnd, 4);
+
+    CloseHandle(hThread);
 
     exit(0);
     return Msg.wParam;

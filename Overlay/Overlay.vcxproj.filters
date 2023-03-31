@@ -24,10 +24,10 @@
     <ClInclude Include="Include\Options.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Overlay.h">
+    <ClInclude Include="Include\stdafx.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="functions\screenRecoder.h">
+    <ClInclude Include="functions\screenRecorder.h">
       <Filter>functions</Filter>
     </ClInclude>
   </ItemGroup>
