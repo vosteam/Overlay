@@ -2,6 +2,13 @@
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    std::string folder_path = "C:\\Users\\" + (std::string)std::getenv("USERNAME") + "\\Documents\\vos.team\\";
+    if (!std::filesystem::exists(folder_path)) {
+        std::filesystem::create_directories(folder_path);
+        std::filesystem::create_directories(folder_path + "video");
+        std::filesystem::create_directories(folder_path + "screenshot");
+    }
+
     std::string file_screenshot = "screenshot_" + std::to_string(time(NULL)) + ".bmp";
     std::string file_video = "video_" + std::to_string(time(NULL)) + ".mp4";
 
@@ -80,8 +87,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         g_szClassName,
         g_szClassName,
         WS_POPUP | WS_VISIBLE,
-        0, 0, 1920, 1080,
+        0, 0, screenWidth, screenHeight,
         NULL, NULL, hInstance, NULL);
+
 
     SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);
     DwmExtendFrameIntoClientArea(hwnd, &margins);
@@ -90,6 +98,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     RegisterHotKey(hwnd, 2, MOD_ALT, 0x58);
     RegisterHotKey(hwnd, 3, MOD_ALT, 0x50);
     RegisterHotKey(hwnd, 4, MOD_ALT, 0x56);
+
 
     while (GetMessage(&Msg, NULL, 0, 0) > 0)
     {
