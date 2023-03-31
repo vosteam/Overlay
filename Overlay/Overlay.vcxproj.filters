@@ -3,4 +3,29 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{84d30480-42d9-4793-b08b-1bb6712fd72b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="functions">
+      <UniqueIdentifier>{140481ac-0012-4a9a-803c-5f6ddcde3cca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Include.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\addWatermark.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\captureScreen.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Options.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Overlay.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

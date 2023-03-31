@@ -130,6 +130,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="functions\addWatermark.h" />
+    <ClInclude Include="functions\captureScreen.h" />
+    <ClInclude Include="Include\Include.h" />
+    <ClInclude Include="Include\Options.h" />
+    <ClInclude Include="Include\Overlay.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
