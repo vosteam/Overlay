@@ -27,5 +27,8 @@
     <ClInclude Include="Include\Overlay.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="functions\screenRecoder.h">
+      <Filter>functions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

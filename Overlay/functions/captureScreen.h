@@ -1,7 +1,7 @@
 #pragma once
 #include "addWatermark.h"
 
-void captureScreen(std::string file_Name)
+void captureScreen(std::string file_screenshot)
 {
     HDC hdcScreen;
     HDC hdcDIB;
@@ -28,7 +28,7 @@ void captureScreen(std::string file_Name)
     // Добавление ватермарки на контекст
     addWatermark(hdcScreen, hdcDIB, bmi);
 
-    hFile = CreateFile(("C:\\Users\\" + (std::string)std::getenv("USERNAME") + "\\Documents\\vos.team\\" + file_Name).c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    hFile = CreateFile(("C:\\Users\\" + (std::string)std::getenv("USERNAME") + "\\Documents\\vos.team\\" + file_screenshot).c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     BITMAPFILEHEADER hdr = { };
     hdr.bfType = 0x4d42; // Буквы 'B' и 'M'
     hdr.bfOffBits = sizeof(hdr) + sizeof(BITMAPINFOHEADER);
