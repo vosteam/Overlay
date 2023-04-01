@@ -4,3 +4,4 @@
 #include "../functions/addWatermark.h"
 #include "../functions/captureScreen.h"
 #include "../functions/screenRecorder.h"
+#include "../functions/timeAdd.h"
