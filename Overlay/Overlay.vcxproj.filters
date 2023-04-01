@@ -24,11 +24,8 @@
     <ClInclude Include="Include\Options.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Overlay.h">
-      <Filter>Include</Filter>
-    </ClInclude>
-    <ClInclude Include="functions\screenRecoder.h">
-      <Filter>functions</Filter>
-    </ClInclude>
+    <ClInclude Include="functions\screenRecorder.h" />
+    <ClInclude Include="functions\timeAdd.h" />
+    <ClInclude Include="Include\stdafx.h" />
   </ItemGroup>
 </Project>
