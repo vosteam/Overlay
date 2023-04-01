@@ -47,6 +47,6 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: overlay.exe
-        path: ${{env.SOLUTION_FILE_PATH}}x64/Release/overlay.exe
+        path: ${{env.SOLUTION_FILE_PATH}}x64\Release\overlay.exe
 
 
