@@ -1,8 +1,10 @@
 #pragma once
 #include "addWatermark.h"
 
-void captureScreen(std::string file_screenshot)
+inline void captureScreen()
 {
+    std::string file_screenshot = "screenshot_" + std::to_string(time(NULL)) + ".bmp";
+
     HDC hdcScreen;
     HDC hdcDIB;
     HBITMAP hbmDIB;

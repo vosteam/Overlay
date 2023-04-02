@@ -10,7 +10,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
 
     std::string file_screenshot = "screenshot_" + std::to_string(time(NULL)) + ".bmp";
-    std::string file_video = "video_" + std::to_string(time(NULL)) + ".mp4";
 
     switch (msg)
     {
@@ -26,11 +25,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         else if (wParam == 3)
         {
-            captureScreen(file_screenshot);
+            captureScreen();
         }
         else if (wParam == 4)
         {
-            screenRecorder(file_video);
+            std::thread t(screenRecorder, file_screenshot);
+            t.join();
         }
         break;
     case WM_PAINT:
@@ -104,6 +104,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     UnregisterHotKey(hwnd, 3);
     UnregisterHotKey(hwnd, 4);
 
-    exit(0);
     return Msg.wParam;
 }
