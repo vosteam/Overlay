@@ -38,7 +38,8 @@ jobs:
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
     - name: Install vcpkg
-      run: ./vcpkg/bootstrap-vcpkg.sh
+      run: ./vcpkg/bootstrap-vcpkg.bat
+      
     - name: Install dependencies
       run: ./vcpkg/vcpkg install opencv:x64-windows-static
 
