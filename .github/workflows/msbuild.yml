@@ -37,11 +37,13 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
 
-    - name: Install vcpkg
-      run: ../vcpkg/bootstrap-vcpkg.bat
-
-    - name: Install dependencies
-      run: ../vcpkg/vcpkg install opencv:x64-windows-static
+    - name: vcpkg build
+      uses: johnwason/vcpkg-action@v4
+      id: vcpkg
+      with:
+        pkgs: opencv
+        triplet: x64-windows-static
+        token: ${{ github.token }}
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
