@@ -2,6 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ImGui\backends\imgui_impl_dx9.cpp" />
+    <ClCompile Include="ImGui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_tables.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="functions\addWatermark\addWatermark.cpp" />
+    <ClCompile Include="functions\captureScreen\captureScreen.cpp" />
+    <ClCompile Include="functions\screenRecorder\screenRecorder.cpp" />
+    <ClCompile Include="functions\timeAdd\timeAdd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Include">
@@ -15,17 +26,29 @@
     <ClInclude Include="Include\Include.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="functions\addWatermark.h">
+    <ClInclude Include="functions\addWatermark\addWatermark.h">
       <Filter>functions</Filter>
     </ClInclude>
-    <ClInclude Include="functions\captureScreen.h">
+    <ClInclude Include="functions\captureScreen\captureScreen.h">
       <Filter>functions</Filter>
     </ClInclude>
     <ClInclude Include="Include\Options.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="functions\screenRecorder.h" />
-    <ClInclude Include="functions\timeAdd.h" />
     <ClInclude Include="Include\stdafx.h" />
+    <ClInclude Include="functions\timeAdd\timeAdd.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="functions\screenRecorder\screenRecorder.h">
+      <Filter>functions</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\backends\imgui_impl_dx9.h" />
+    <ClInclude Include="ImGui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
   </ItemGroup>
 </Project>

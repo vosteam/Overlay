@@ -1,7 +1,7 @@
 #pragma once
 #include "Include.h"
 #include "Options.h"
-#include "../functions/addWatermark.h"
-#include "../functions/captureScreen.h"
-#include "../functions/screenRecorder.h"
-#include "../functions/timeAdd.h"
+#include "../functions/addWatermark/addWatermark.h"
+#include "../functions/captureScreen/captureScreen.h"
+#include "../functions/screenRecorder/screenRecorder.h"
+#include "../functions/timeAdd/timeAdd.h"

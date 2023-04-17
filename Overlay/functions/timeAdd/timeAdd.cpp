@@ -1,6 +1,6 @@
-#include "../Include/Include.h"
+#include "timeAdd.h"
 
-void timeAdd(HWND hwnd){
+void timeAd::timeAdd(HWND hwnd) {
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hwnd, &ps);
 	TEXTMETRIC tm;

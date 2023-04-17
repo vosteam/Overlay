@@ -25,17 +25,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         else if (wParam == 3)
         {
-            captureScreen();
+            screenshot::captureScreen();
         }
         else if (wParam == 4)
         {
-            std::thread t(screenRecorder, file_screenshot);
-            t.join();
+            std::thread t( record::screenRecorder , file_screenshot);
+            t.detach();
         }
         break;
     case WM_PAINT:
     {
-        timeAdd(hwnd);
+        timeAd::timeAdd(hwnd);
     }
     break;
     case WM_DESTROY:

@@ -1,7 +1,6 @@
-#pragma once
-#include "addWatermark.h"
+#include "captureScreen.h"
 
-inline void captureScreen()
+void screenshot::captureScreen()
 {
     std::string file_screenshot = "screenshot_" + std::to_string(time(NULL)) + ".bmp";
 
@@ -28,7 +27,7 @@ inline void captureScreen()
     BitBlt(hdcDIB, 0, 0, bmi.bmiHeader.biWidth, bmi.bmiHeader.biHeight, hdcScreen, 0, 0, SRCCOPY);
 
     // Добавление ватермарки на контекст
-    addWatermark(hdcScreen, hdcDIB, bmi);
+    water::addWatermark(hdcScreen, hdcDIB, bmi);
 
     hFile = CreateFile(("C:\\Users\\" + (std::string)std::getenv("USERNAME") + "\\Documents\\vos.team\\screenshot\\" + file_screenshot).c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     BITMAPFILEHEADER hdr = { };

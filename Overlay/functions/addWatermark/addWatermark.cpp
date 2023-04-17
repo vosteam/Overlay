@@ -1,7 +1,6 @@
-#pragma once
-#include "../Include/Include.h"
+#include "addWatermark.h"
 
-void addWatermark(HDC hdc, HDC hdcDIB, BITMAPINFO bmi)
+void water::addWatermark(HDC hdc, HDC hdcDIB, BITMAPINFO bmi)
 {
     HFONT hFont;
     LOGFONT lf = { 0 };
